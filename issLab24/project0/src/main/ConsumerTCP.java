@@ -12,11 +12,24 @@ import unibo.basicomm23.utils.BasicMsgUtil;
 public class ConsumerTCP extends Thread{
 	private ServerSocket server;
 	private int port;
+	private int id;
 	
 	public ConsumerTCP() {
 		try {
 			port=8011;
 			server=new ServerSocket(port);
+			id=1;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ConsumerTCP(int p) {
+		try {
+			port=p;
+			server=new ServerSocket(port);
+			id=1;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,16 +43,12 @@ public class ConsumerTCP extends Thread{
                 //creating socket and waiting for client connection
 				Socket socket = server.accept();
 				
-				//passaggio alla libreria Interaction una volta ricevuta la connessione
-				Interaction i=new TcpConnection(socket);
-				
-				//poi si procede come visto a lezione
-				IApplMessage msg=i.receive();
-				
 				//gestione messaggio conesecuzione relativa funzione
-				String funz=msg.msgContent();
-				System.out.println(funz);
-				i.forward(BasicMsgUtil.buildRequest("Consumer","response","ok",msg.msgSender()));
+				ConsumerLogic logic=new ConsumerLogic(socket,id);
+				logic.run();
+				
+				//aumento msgid dopo ogni comunicazione
+				id++;
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

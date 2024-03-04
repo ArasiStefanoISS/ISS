@@ -396,26 +396,26 @@
             }
         </pre><br /><br />
 
-        Il Consumatore è un POJO che estende la classe Thread per poter eseguire come un server in attesa di
-        connessioni.<br /><br />
+        Il Consumatore è suddiviso in due classi, una per la ricezione delle comunicazioni ed una per la gestione della
+        logica per la gestione del singolo messaggio, disaccoppiando la logica applicativa da quella di supporto alla
+        messaggistica<br /><br />
 
-        Il Consumatore gestisce i messaggi in maniera FIFO, ed anchesso seguendo le direttive della libreria
-        unibo.basiccomm23.<br /><br />
+        La classe ConsumerTCP è la classe che funge da server tcp per la ricezione di comunicazioni da parte dei
+        Producer sfruttando ServerSocket, poi passerà l'esecuzione alla parte di logica e riprendere l'attesa di nuove
+        comunicazioni.<br /><br />
 
-        Viene sfruttata la classe ServerSocket per attendere una richiesta di connessione.<br />
-        Una volta ricevuta la Socket verrà incapsulata all'interno di una Interaction per gestire la comunicazione ad un
-        livello di astrazione maggiore.<br /><br />
-
-        In seguito vengono mostrate le funzionalità principali del Consumer.<br />
+        In seguito viene mostrato il funzionamento di ConsumerTCP:<br />
         <pre>
             public class ConsumerTCP extends Thread{
                 private ServerSocket server;
                 private int port;
+                private int id;
                 
                 public ConsumerTCP() {
                     try {
                         port=8011;
                         server=new ServerSocket(port);
+                        id=1;
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -429,16 +429,12 @@
                             //creating socket and waiting for client connection
                             Socket socket = server.accept();
                             
-                            //passaggio alla libreria Interaction una volta ricevuta la connessione
-                            Interaction i=new TcpConnection(socket);
-                            
-                            //poi si procede come visto a lezione
-                            IApplMessage msg=i.receive();
-                            
                             //gestione messaggio conesecuzione relativa funzione
-                            String funz=msg.msgContent();
-                            System.out.println(funz);
-                            i.forward(BasicMsgUtil.buildRequest("Consumer","response","ok",msg.msgSender()));
+                            ConsumerLogic logic=new ConsumerLogic(socket,id);
+                            logic.run();
+                            
+                            //aumento msgid dopo ogni comunicazione
+                            id++;
                             
                         } catch (Exception e) {
                             // TODO Auto-generated catch block
@@ -446,7 +442,59 @@
                         }
                     }
                 }
-            
+            }
+        </pre>
+
+        Il ConsumetTCP gestisce i messaggi in maniera FIFO, ed anchesso seguendo le direttive della libreria
+        unibo.basiccomm23.<br /><br />
+
+        ConsumerLogic gestisce la comunicazione singola tra consumer ed un producer che fa inviato un messaggio<br />
+        Una volta ricevuta la Socket verrà incapsulata all'interno di una Interaction per gestire la comunicazione ad un
+        livello di astrazione maggiore.<br /><br />
+
+        ConsumerLogic estende la classe Thread di java per essere eseguita in parallelo a ConsumerTCP per non bloccare
+        la ricezione di nuove connessioni<br /><br />
+
+        In seguito vengono mostrate le funzionalità principali del ConsumerLogic.<br />
+        <pre>
+            public class ConsumerLogic extends Thread{
+                private Socket socket;
+                private Interaction inter;
+                private int id;
+                
+                private ConsumerLogic(Socket soc,int i) {
+                    try {
+                        this.socket=soc;
+                        this.inter=new TcpConnection(this.socket);
+                        this.id=i;
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                
+                public void run() {
+                    IApplMessage msg;
+                    try {
+                        //estrazione messaggio
+                        msg = this.getInter().receive();
+                        System.out.println(msg);
+                        
+                        //risposta simil-ack
+                        if (msg.msgContent().equals("consume")) {
+                            this.getInter().forward(BasicMsgUtil.buildRequest(msg.msgReceiver(),Integer.toString(id),"ok",msg.msgSender()));
+                        }
+                        else {
+                            this.getInter().forward(BasicMsgUtil.buildRequest(msg.msgReceiver(),Integer.toString(id),"Bad Request",msg.msgSender()));
+                        }
+                        
+                        //chiusura connessione
+                        this.getInter().close();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
             }
         </pre><br /><br />
 
