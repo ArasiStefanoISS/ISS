@@ -57,7 +57,9 @@ eclipse {
 }
 
 application {
-        mainClass = 'main.ServiceCallerInteraction'
+        //mainClass = 'main.ServiceCallerInteraction'
+        //mainClass = 'main.ServiceCallerTCPNaive'
+        mainClass = 'main.ServiceInteraction'
 }
 
 jar {

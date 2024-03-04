@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <!--
+<link rel="stylesheet" type="text/css" href="../css/issStyle1.css">
+<script type="text/javascript" src="../css/issStyle.js"></script>
+-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/js/foundation.min.js"
+        crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./commons/resources/styles/templateISS.css">
+    <link rel="stylesheet" type="text/css" href="./commons/resources/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="./commons/resources/styles/navbar.css">
+    <link rel="stylesheet" type="text/css" href="./commons/resources/styles/table.css">
+    <link rel="stylesheet" type="text/css" href="./commons/resources/styles/code.css">
+    <!-- <script type="text/javascript" src="./commons/resources/scripts/myScripts.js"></script> -->
+    <style type="text/css">
+        body {
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+
+        ;
+
+        P {
+            font-family: Tahoma;
+            font-size: 10pt;
+        }
+
+        ;
+
+        a,
+        a:visited,
+        a:active,
+        a:link,
+        a:hover {
+            text-decoration: underline;
+            color: #545454;
+            background-color: transparent;
+            font-size: 93%;
+        }
+
+        a:hover {
+            background-color: #cccccc;
+        }
+
+
+        hr {
+            clear: both;
+            height: 1px;
+            color: #242424;
+            background-color: transparent;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #242424;
+            clear: left;
+            font: 100% Tahoma, Helvetica, Arial, sans-serif;
+            margin-bottom: 0.5em;
+            padding-top: 0.5em;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        top {
+            width: 100%;
+        }
+
+
+        #i {
+            color: #ff1010;
+        }
+
+        tt {
+            font-family: "Arial";
+            font-size: 90%;
+            color: #006600;
+        }
+
+        em {
+            font-family: "Arial";
+            font-size: 80%;
+            font-weight: bold;
+            border-style: solid;
+            border-color: #abe876;
+            color: #1632cc;
+        }
+
+        bc {
+            font-family: "Arial";
+            font-size: 90%;
+            font-weight: bold;
+            color: #990000;
+            background-color: #fcf8c7;
+        }
+
+        ks {
+            font-family: "Arial";
+            font-weight: bold;
+            color: #0000CD;
+            font-size: 90%;
+        }
+
+        kc {
+            font-family: "Arial";
+            font-weight: bold;
+            color: #008000;
+            font-size: 90%;
+        }
+
+        pre {
+            font-family: "Consolas";
+            font-size: 85%;
+            background-color: #f5f5f5;
+            border: 1.5px solid silver;
+            padding: 5px;
+        }
+
+        m {
+            font-family: "Helvetica";
+            line-height: 100%;
+            font-size: 75%;
+        }
+
+        div.body {
+
+            font-size: 18px;
+        }
+
+        k {
+            color: #990000;
+            font-weight: bold;
+            font-size: 90%;
+        }
+
+        h1 {
+            font-size: 150%;
+            background-color: #b2c0ff;
+            padding: 10px;
+        }
+
+        h2 {
+            background-color: #9ed8ff;
+            font-size: 130%;
+        }
+
+        h3 {
+            background-color: #e6ccff;
+            font-size: 100%;
+        }
+
+        h4 {
+            background-color: #ccffcc;
+            font-size: 100%;
+            width: 95%;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        h5 {
+            background-color: #d5ffb0;
+            font-size: 100%;
+
+        }
+
+        div.req {
+            background-color: #d9ffb3;
+            font-size: 18px;
+            width: 700px;
+            border: 3px solid green;
+            padding: 15px;
+            margin: 10px;
+        }
+
+        div.remark {
+            background-color: #E3F2FD;
+            border: 1.5px solid #d5f2ed;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 25px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        ol,
+        ul,
+        li {
+            margin: 0;
+            margin-left: 10px;
+            padding: 0;
+            padding-bottom: 5px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        img {
+            border: 1.5px solid #d5f2ed
+        }
+
+        a,
+        a:visited,
+        a:active,
+        a:link,
+        a:hover {
+            text-decoration: underline;
+            color: #545454;
+            background-color: transparent;
+        }
+
+        div.wrapdesc {
+            width: 90%;
+            margin: auto;
+        }
+
+        div.imagedesc {
+            width: 85%;
+            margin: auto;
+        }
+    </style>
+
+
+
+</head>
+
+
+
+
+
+
+<title>ArasiStefano_ProdConsAfterAnalisys</title>
+</head>
+
+<!--
+	<body onload="loadNav();">
+		<div id="openButton" class="openButton" onclick="openNav(true)">&#9776; Menu</div>
+		<div id="sidenav" class="sidenav">
+			<a class="closeButton" href="javascript:void(0)" onclick="closeNav(true)">&times;</a>
+			<a href=".README.html">ReadMe</a>
+			<a class="sprint" href="../../../Sprint0/Codice/userDocs/Cold%20Storage%20Service%20-%20Natali%20V3.html">Sprint0</a>
+			<a class="sprint" href="../../../Sprint1.0/Codice/userDocs/Sprint%201.0%20-%20V3.html">Sprint1.0</a>
+			<a class="sprint" href="../../../Sprint1.1/Codice/userDocs/Sprint%201.1%20-%20V3.html">Sprint1.1</a>
+			<a id="currentSprint" class="sprint" href="#">&#8211;&#8212; Sprint2 &#8212;&#8211;</a>
+			<div class="sidenavSection">
+				<a href="#Goal Sprint 2">Goal Sprint 2</a>
+				<a href="#Requisiti">Requisiti</a>
+				<a href="#Analisi dei Requisiti">Analisi dei Requisiti</a>
+				<a href="#Analisi del Problema">Analisi del Problema</a>
+				<a href="#Test Plan">Test Plan</a>
+				<a href="#Progettazione">Progettazione</a>
+				<a href="#Deployment">Deployment</a>
+			</div>
+			<p class="separator">&mdash;&mdash;&mdash;&ndash;&ndash;&mdash;&mdash;&mdash;</p>
+			<a class="sprint" href="../../../Sprint3/Codice/userDoc/Sprint%203.html">Sprint3</a>
+			<bottom-spacer/>
+		</div>
+-->
+
+<body>
+    <div id="top">
+        <h1>LABORATORIO DI INGEGNERIA DEI SISTEMI SOFTWARE <font size="5"></font>
+        </h1>
+    </div>
+
+    <div class="body">
+        <h2>Introduction</h2>
+
+
+        <h2>Requirements</h2>
+
+
+        <div class="remark">
+            Costruire un sistema software distribuito costituio da N (N>=1) Produttori che inviano informazione a 1
+            Consumatore, il quale deve elaborare tale informazione.<br /><br />
+
+            La dislocazione dei componenti sui nodi di elaborazione può essere:
+
+            <ul>
+                <li>OneNode: tutti i componenti operano nello stesso nodo;
+
+                <li>TwoNodes: gli N Produttori operano in uno stesso nodo, mentre il Consumatore opera in un diverso
+                    nodo;
+
+                <li>ManyNodes: il Consumatore opera in suo proprio nodo, mentre i Produttori operano su K nodi diversi
+                    (1<\K<=N). </ul>
+        </div>
+
+
+
+        <h2>Requirement analysis</h2>
+
+        <div class="remark">
+            Produttore: Entità che invia informazioni.<br />
+
+            Consumatore: Entità che riceve informazioni.<br /><br />
+
+            Il metodo di comunicazione non è stato dfinito dai requisiti.<br />
+            Per questo sprint verrà considerato come protocollo di comunicazione TCP e comunicazione diretta tra
+            Produttore e Consumatore.<br /><br />
+
+            Il contenuto dell'informazione non è stato definito dai requisiti.<br />
+            Per trasmettere informazioni verrà usato il formato dei messaggi definito dalla libreria in
+            IApplMessage.<br /><br />
+
+            Produttori e Consumatori devono poter essere eseguiti sia sulla stessa macchina che in macchine
+            differenti.<br /><br />
+        </div>
+
+
+    </div>
+
+    <h2>Problem analysis</h2>
+
+    <div class="remark">
+        L'utilizzo del protocollo TCP implica come minimo la conoscenza da parte di produttori del consumatore, che
+        potrebbe essere un problema di sicurezza<br /><br />
+
+        Non è specificato dei requisiti in che modo il consumatore processa i messaggi, per questo sprint si adotterà
+        una strategia FIFO ma un'implementazione diversa basata sul filtraggio dei messaggi per tipo di richiesta
+        potrebbe essere rilevante per la gestione del carico computazionale.<br /><br />
+
+        La comunicazione verrà fatta asincrona per avere più flessibilità nella gestione dei messaggi.<br />
+        Per mantenere sicurezza sulla ricezione del messaggio da parte dell'consumatore quest'ultimo dovrà inviare un
+        messaggio simil-ack al termine della gestione del messaggio al rispettivo produttore.<br /><br />
+
+        La scelta di usare il protocollo TCP per la comunicazione implica che il Consumatore deve necessariamente essere
+        online prima dell'invio dei messaggi dei Produttori, altrimenti i messaggi verranno persi.<br /><br />
+
+        La logica applicativa dei Produttori e dei Consumatori dovrebbe essere il più debbolmente accoppiati possibile
+        dalla parte di messaggistica, considerando anche che il sistema di messaggi potrebbe diventare anchesso
+        distrubuito in un futuro a seconda dell'implementazione e dalla scalabilità del sistema.<br />
+    </div>
+
+
+    <h2>Test plans</h2>
+    <div class="remark">
+        Il testing deve poter essere svolto in maniera automatizzata.<br /><br />
+
+        Il disaccoppiamento delle singole parti del sistema semplifica il testing delle componenti.<br />
+    </div>
+
+
+    <h2>Project</h2>
+    <div class="remark">
+        Il progetto sarà suddiviso in due parti fondamentali: il Produttore ed il Consumatore.<br />
+        Verrà poi utilizzato il main come bootstrap del sistema.<br /><br />
+
+        Il Produttore è un POJO che invia messaggi al Consumatore secondo la specifica della libreria
+        unibo.basicomm23.Interaction e sfruttando questo costrutto stesso.<br /><br />
+
+        Il Produttore sfrutta un oggetto di tipo Interaction per inviare un messaggio in modalità fire and forget, ma
+        attende comunque una risposta di conferma dal consumatore per garantire l'arrivo del messaggio a
+        destinazione.<br /><br />
+
+        In seguito vengono mostrate le funzionalità principali del Producer.<br />
+        <pre>
+            public class ProducerTCP {
+                private String hostIp;
+                private int hostPort;
+                private int id;
+                private String consumer;
+                private Interaction interaction;
+                
+                public ProducerTCP() {
+                    hostIp="127.0.0.1";
+                    hostPort=8011;
+                    id=1;
+                    consumer="servicemath";
+                    ConnectionFactory conFac=new ConnectionFactory();
+                    interaction=conFac.createClientSupport(ProtocolType.tcp,hostIp, Integer.toString(hostPort));
+                }
+
+                public void doJob() {
+                    try {
+                        this.getInteraction().forward(BasicMsgUtil.buildRequest("Producer "+this.getId(),"consume","consume(1)",this.getConsumer()));
+                        IApplMessage msg=this.getInteraction().receive();
+                        System.out.println("Producer "+ this.getId()+" msg received: "+msg);
+                        this.getInteraction().close();
+                    }catch(Exception e) {
+                        //messaggio errore
+                    }
+                }
+            }
+        </pre><br /><br />
+
+        Il Consumatore è un POJO che estende la classe Thread per poter eseguire come un server in attesa di
+        connessioni.<br /><br />
+
+        Il Consumatore gestisce i messaggi in maniera FIFO, ed anchesso seguendo le direttive della libreria
+        unibo.basiccomm23.<br /><br />
+
+        Viene sfruttata la classe ServerSocket per attendere una richiesta di connessione.<br />
+        Una volta ricevuta la Socket verrà incapsulata all'interno di una Interaction per gestire la comunicazione ad un
+        livello di astrazione maggiore.<br /><br />
+
+        In seguito vengono mostrate le funzionalità principali del Consumer.<br />
+        <pre>
+            public class ConsumerTCP extends Thread{
+                private ServerSocket server;
+                private int port;
+                
+                public ConsumerTCP() {
+                    try {
+                        port=8011;
+                        server=new ServerSocket(port);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                
+                public void run() {
+                    while(true){
+                        try {
+                            System.out.println("Waiting for the client request");
+                            //creating socket and waiting for client connection
+                            Socket socket = server.accept();
+                            
+                            //passaggio alla libreria Interaction una volta ricevuta la connessione
+                            Interaction i=new TcpConnection(socket);
+                            
+                            //poi si procede come visto a lezione
+                            IApplMessage msg=i.receive();
+                            
+                            //gestione messaggio conesecuzione relativa funzione
+                            String funz=msg.msgContent();
+                            System.out.println(funz);
+                            i.forward(BasicMsgUtil.buildRequest("Consumer","response","ok",msg.msgSender()));
+                            
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            
+            }
+        </pre><br /><br />
+
+        In seguito viene riportato il main come esempio si bootstrap del sistema:<br />
+        <pre>
+            public class BootStrap{
+                
+                public static void main(String[] args){
+                    ProducerTCP prod=new ProducerTCP();
+                    prod.run();
+                    ConsumerTCP cons=new ConsumerTCP();
+                    cons.doJob();
+                }
+            }
+        </pre>
+    </div>
+
+    </div>
+
+    <h2>Testing</h2>
+
+
+    <h2>Deployment</h2>
+
+
+    <h2>Maintenance</h2>
+
+    <!-- USEFUL
+<table style="width:100%" border="1">
+<tr>
+<td style="width:50%">
+</td>
+<td></td>
+</tr>
+</table>
+-->
+
+    <br /><br />
+    </div>
+
+    <div style="background-color:rgba(86, 56, 253, 0.9); width:60%;text-align:left;color:white">
+        By Arasi Stefano matr. 0001103134 email: stefano.arasi@studio.unibo.it,
+        <img src="./imgs/foto.jpg" alt="mbot" width="15%" height="15%">
+        GIT repo: <a href="https://github.com/ArasiStefanoISS/ISS">https://github.com/ArasiStefanoISS/ISS</a>
+    </div>
+</body>
+
+</html>
