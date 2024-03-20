@@ -1,0 +1,43 @@
+System helloworld0
+
+Dispatch info : info(N)
+
+Context ctx0 ip [host="localhost" port=8000] 
+
+
+QActor consumer context ctx0{
+	
+	State s0 initial{
+		println("$name START") color red
+	}
+	Transition t0 whenMsg info -> handleInfo
+	
+	State handleInfo {
+		onMsg(info : info(N)){
+			println("$name received: ${msgSender(0)}") color red
+			//forward consumer -m info : info(10) come ricavo il sender di un messaggio?
+			
+		}
+	}
+	Transition t0 whenMsg info -> handleInfo
+}
+
+QActor producer context ctx0{
+	State s0 initial{
+		println("$name START") color blue
+		forward consumer -m info : info(10)
+		forward consumer -m info : info(20)
+		forward consumer -m info : info(50)
+	}
+}    
+
+QActor producer2 context ctx0{
+	State s0 initial{
+		println("$name START") color magenta
+		forward consumer -m info : info(100)
+		forward consumer -m info : info(200)
+		forward consumer -m info : info(500)
+	}
+}    
+
+
