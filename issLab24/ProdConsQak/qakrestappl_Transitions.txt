@@ -1,2 +1,2 @@
-{"actor":"consumer", "msgType":"dispatch", "curstate":"s0", "nextstate":"handleInfo", "msgId":"info"}
-{"actor":"consumer", "msgType":"dispatch", "curstate":"handleInfo", "nextstate":"handleInfo", "msgId":"info"}
+{"actor":"otherobserver", "msgType":"dispatch", "curstate":"s0", "nextstate":"handleUpdate", "msgId":"short"}
+{"actor":"otherobserver", "msgType":"dispatch", "curstate":"handleUpdate", "nextstate":"handleUpdate", "msgId":"short"}

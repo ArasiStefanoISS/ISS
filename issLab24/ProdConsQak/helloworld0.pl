@@ -2,6 +2,7 @@
 % helloworld0 description   
 %====================================================================================
 dispatch( info, info(N) ).
+dispatch( ack, ack(N) ).
 %====================================================================================
 context(ctx0, "localhost",  "TCP", "8000").
  qactor( consumer, ctx0, "it.unibo.consumer.Consumer").
