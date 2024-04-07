@@ -1,0 +1,24 @@
+System wd
+ 
+Request recogn : recogn(N)
+Reply rplRecogn : rplRecogn(N) for recogn
+
+Context ctxrasp ip [host="127.0.0.1" port=8082]
+Context ctximg ip [host="localhost" port=8083]
+
+ExternalQActor rasp context ctxrasp
+
+QActor img context ctximg{
+	State start initial{
+		println("Img. recogn. START") color green
+	}
+	Transition t0 whenRequest recogn -> recognHandle
+				  
+	State recognHandle{
+		//gestione dell'immagine e ritorno della risposta
+		println("Img. recogn. ELABORAZIONE") color green
+		delay 500
+		replyTo recogn with rplRecogn : rplRecogn(0)
+	}
+	Transition t0 whenRequest recogn -> recognHandle
+}

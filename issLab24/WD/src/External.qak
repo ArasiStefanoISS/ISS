@@ -1,0 +1,129 @@
+System wd
+
+Dispatch start : start(N)
+Dispatch stop : stop(N)
+Dispatch on : on(N)
+Dispatch off : off(N)
+Dispatch sonar : sonar(N)
+Request foto : foto(N)
+Reply rplFoto : rplFoto(N) for foto
+Request recogn : recogn(N)
+Reply rplRecogn : rplRecogn(N) for recogn
+
+Context ctxstation ip [host="127.0.0.1" port=8081]
+Context ctxrasp ip [host="localhost" port=8082]
+Context ctximg ip [host="127.0.0.1" port=8083]
+
+ExternalQActor station context ctxstation
+ExternalQActor img context ctximg
+
+QActor rasp context ctxrasp{
+	State start initial{
+		println("Raspberry START") color blue
+	}
+	Transition t0 whenMsg start -> beginHandle
+	
+	State beginHandle{
+		println("Beginning work") color blue
+		forward sonar -m start : start(0)
+	}
+	Transition t0 whenMsg sonar -> sonarHandle
+				  whenMsg stop -> stopHandle
+	
+	State sonarHandle{
+		//in caso non ci sia nulla
+		forward blueled -m off : off(0)
+		//in caso ci sia qualcosa
+		forward blueled -m on : on(0)
+		request camera -m foto : foto(0)
+	}
+	Transition t0 whenReply rplFoto -> imgRecog
+				  whenReply rplRecogn -> ledHandle
+				  whenMsg stop -> stopHandle
+				 
+	State imgRecog{
+		request img -m recogn : recogn(0)//invio della foto ricevuta per elaborarla
+	}
+	Goto sonarHandle
+				  
+	State ledHandle{
+		//invio del messaggio di accensione solo in caso di risposta affermativa
+		forward station -m on : on(0)
+		delay 1500
+		//invio del messaggio di spegnimento di entrambi i led solo in caso di risposta negativa
+		forward blueled -m off : off(0)
+		forward station -m off : off(0)
+	}
+	Goto sonarHandle
+	
+	State stopHandle{
+		forward blueled -m stop : stop(0)
+		forward camera -m stop : stop(0)
+		forward sonar -m stop : stop(0)
+		println("Raspberry STOP") color blue
+		delay 500
+	}
+}
+
+QActor blueled context ctxrasp {
+	State start initial{
+		println("Blue Led OFF") color cyan
+	}
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+	
+	State onHandle{
+		//accendi led
+		println("Blue Led ON") color cyan
+	}	
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+	
+	State offHandle{
+		//spegni led
+		println("Blue Led OFF") color cyan
+	}	
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle	
+}
+
+QActor sonar context ctxrasp{
+	State start initial{
+		println("Sonar OFF") color yellow
+	}
+	Transition t0 whenMsg start -> scanHandle
+	
+	State scanHandle{
+		//activate sonar
+		println("Sonar ON") color yellow
+		//condizioni logiche sulla distanza DMIN della rilevazione(in un ciclo)
+		delay 500
+		forward rasp -m sonar : sonar(0)
+	}
+	Transition t0 whenMsg stop -> stopHandle
+	
+	State stopHandle{
+		println("Sonar OFF") color yellow
+		delay 500
+	}
+}
+
+QActor camera context ctxrasp{
+	State start initial{
+		println("Camera START") color gray
+	}
+	Transition t0 whenRequest foto -> fotoHandle
+	
+	State fotoHandle{
+		//prendere la foto
+		delay 500
+		println("Picture taken") color gray
+		replyTo foto with rplFoto : rplFoto(0)//invio della foto
+	}
+	Transition t0 whenMsg stop -> stopHandle
+	
+	State stopHandle{
+		println("Camera OFF") color gray
+		delay 500
+	}
+}

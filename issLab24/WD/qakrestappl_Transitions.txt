@@ -1,0 +1,13 @@
+{"actor":"rasp", "msgType":"dispatch", "curstate":"start", "nextstate":"beginHandle", "msgId":"start"}
+{"actor":"rasp", "msgType":"dispatch", "curstate":"beginHandle", "nextstate":"sonarHandle", "msgId":"sonar"}
+{"actor":"rasp", "msgType":"dispatch", "curstate":"beginHandle", "nextstate":"stopHandle", "msgId":"stop"}
+{"actor":"rasp", "msgType":"dispatch", "curstate":"sonarHandle", "nextstate":"stopHandle", "msgId":"stop"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"start", "nextstate":"onHandle", "msgId":"on"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"start", "nextstate":"offHandle", "msgId":"off"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"onHandle", "nextstate":"onHandle", "msgId":"on"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"onHandle", "nextstate":"offHandle", "msgId":"off"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"offHandle", "nextstate":"onHandle", "msgId":"on"}
+{"actor":"blueled", "msgType":"dispatch", "curstate":"offHandle", "nextstate":"offHandle", "msgId":"off"}
+{"actor":"sonar", "msgType":"dispatch", "curstate":"start", "nextstate":"scanHandle", "msgId":"start"}
+{"actor":"sonar", "msgType":"dispatch", "curstate":"scanHandle", "nextstate":"stopHandle", "msgId":"stop"}
+{"actor":"camera", "msgType":"dispatch", "curstate":"fotoHandle", "nextstate":"stopHandle", "msgId":"stop"}

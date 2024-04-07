@@ -1,0 +1,58 @@
+System wd
+
+Dispatch start : start(N)
+Dispatch stop : stop(N)
+Dispatch on : on(N)
+Dispatch off : off(N)
+
+Context ctxstation ip [host="localhost" port=8081]
+Context ctxrasp ip [host="127.0.0.1" port=8082]
+
+ExternalQActor rasp context ctxrasp
+
+QActor station context ctxstation{
+	State start initial{
+		println("Station START") color magenta
+		delay 500
+		forward rasp -m start : start(0)
+		delay 5000
+		forward rasp -m stop : stop(0)
+	}
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+				  
+	State onHandle{
+		forward redled -m on : on(0)
+	}
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+				  
+	State offHandle{
+		forward redled -m off : off(0)
+	}
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+	
+}
+
+QActor redled context ctxstation{
+	State start initial{
+		println("Red Led OFF") color red
+	}
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+	
+	State onHandle{
+		//accendi led
+		println("Red Led ON") color red
+	}	
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle
+	
+	State offHandle{
+		//spegni led
+		println("Red Led OFF") color red
+	}	
+	Transition t0 whenMsg on -> onHandle
+				  whenMsg off -> offHandle	  
+}
