@@ -32,7 +32,7 @@ class Facadeviewer ( name: String, scope: CoroutineScope, isconfined: Boolean=fa
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t03",targetState="showinfo",cond=whenDispatch("smathinfo"))
+					 transition(edgeName="t06",targetState="showinfo",cond=whenDispatch("smathinfo"))
 				}	 
 				state("showinfo") { //this:State
 					action { //it:State
@@ -44,7 +44,7 @@ class Facadeviewer ( name: String, scope: CoroutineScope, isconfined: Boolean=fa
 					//After Lenzi Aug2002
 					sysaction { //it:State
 					}	 	 
-					 transition(edgeName="t04",targetState="showinfo",cond=whenDispatch("smathinfo"))
+					 transition(edgeName="t07",targetState="showinfo",cond=whenDispatch("smathinfo"))
 				}	 
 			}
 		}

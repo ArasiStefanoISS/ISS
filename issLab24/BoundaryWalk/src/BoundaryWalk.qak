@@ -1,0 +1,41 @@
+System bw
+
+Event vrinfo : vrinfo(A,B,C)
+Dispatch move : move(M)  //"M = w|s|a|d!r!l"
+Dispatch sonarname : name(N)
+Dispatch distance : distance(D)
+Dispatch axys : axys(K)
+
+Context ctxWB ip [host="localhost" port=8088]
+Context ctxWEnv ip [host="127.0.0.1" port=8090]
+
+ExternalQActor vRobot context ctxWEnv
+
+QActor walkboundary context ctxWB{
+	State s0 initial{
+		println("Activating BoundaryWalk") color red
+		delay 1000
+	}
+	Goto start
+	
+	State start{
+		forward vRobot -m move : move("w")
+	}
+	Transition t0 whenEvent vrinfo -> handleTurn
+	
+	State handleTurn{
+		//[] gestione tempo
+		onMsg(distance:distance(D)){
+			//gestione distanza e tempo
+			forward vRobot -m move : move("s")
+			forward vRobot -m move : move("w")
+			//contare volte fatto
+		}
+	}
+	Transition t0 whenEvent vrinfo -> handleTurn
+	
+	State end{
+		println("BoundaryWalk terminated") color red
+	}
+	
+}

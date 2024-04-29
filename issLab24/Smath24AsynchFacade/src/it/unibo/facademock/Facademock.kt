@@ -52,8 +52,6 @@ class Facademock ( name: String, scope: CoroutineScope, isconfined: Boolean=fals
 				}	 
 				state("handleusercmd") { //this:State
 					action { //it:State
-						CommUtils.outblue("$name in ${currentState.stateName} | $currentMsg | ${Thread.currentThread().getName()} n=${Thread.activeCount()}")
-						 	   
 						if( checkMsgContent( Term.createTerm("usercmd(CMD)"), Term.createTerm("usercmd(CMD)"), 
 						                        currentMsg.msgContent()) ) { //set msgArgList
 								CommUtils.outblue("$name usercmd:${payloadArg(0)}")
