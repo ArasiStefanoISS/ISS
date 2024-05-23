@@ -1,0 +1,9 @@
+System cleaner
+
+Context ctxclean ip [ host="localhost" port=8090 ]
+
+QActor cleaner context ctxclean{
+	State s0 initial{
+		println("Hello") color red
+	}
+}

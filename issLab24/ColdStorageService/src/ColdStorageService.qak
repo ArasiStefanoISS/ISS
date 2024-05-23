@@ -1,0 +1,50 @@
+System coldstorageservice
+
+Request store:store(N) //numero di kili
+Reply store_accepted:store_accepted(TICKET) for store //numero intero
+Reply store_rejected:store_rejected(X) for store
+
+Context ctxcss ip [ host="localhost" port=8088 ]
+
+QActor soldstorageservice context ctxcss{
+	[# var capacity: Int =100 #]
+	State s0 initial{
+		println("START") color red
+	}
+	Transition t1 whenRequest store -> handleStore
+	
+	State handleStore{
+		onMsg(store:store(K)){
+			[# val load=payloadArg(0) #]
+			if [# capacity - load >0 #] {
+				[# capacity=capacity-load #]
+				replyTo store with store_accepted : store_accepted(ok)
+			} else {
+				replyTo store with store_rejected : store_rejected(no_space)
+			}
+		}
+	}
+	Transition t1 whenRequest store -> handleStore
+}
+
+QActor drivermock context ctxcss{
+	State s0 initial{
+		println("START driver") color blue
+		delay 500
+		request soldstorageservice -m store : store(101)
+	}
+	Transition t0 whenReply store_accepted -> handleStore
+			      whenReply store_rejected -> stop
+			      
+	State handleStore{
+		printCurrentMessage
+		/*onMsg(store_accepted:store_accepted(K)){
+			
+		}*/
+	}
+	
+	State stop{
+		println("STOPPING SYSTEM") color red
+		//[# System.exit(1)#]
+	}
+}
